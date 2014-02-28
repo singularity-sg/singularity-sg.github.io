@@ -1,1 +1,67 @@
-Hello World
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>The Singapore Singularity by singularity-sg</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/singularity-sg">View On GitHub</a></li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>The Singapore Singularity</h1>
+          <p>A blog about Agile Software Development and Extreme Programming</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/singularity-sg">singularity-sg</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <p>Anyone that had been working on multiple projects on the same boxes will know that there is never a certainty if the development environment you have worked on for a particular project will still be able to run months down the road. It'll probably be filled with all sorts of gunk and remnants of other similar projects which would cause problems when you try to run your code again. This problem was especially pertinent if you run code that is very environment sensitive e.g. Ruby on Rails and its gems.</p>
+
+<p>Thus, the idea of an automatically provisioned development environment that can be spun up instantly in a clean state was something that had been talked about for a long time in my agile development team. Recently, we came across Vagrant (<a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a>) and it seemed like the panacea to our coding environment problems. I had it setup for a Ruby On Rails project and it will automatically install RVM, Ruby gems and all the native packages for the Vagrant box. It will also automatically provision MySQL and even installs an Aptana Studio ide.</p>
+
+<p>I installed Vagrant on 4 powerful development machines (a mix of Ubuntu Linux, CentOS Linux and Windows 7 host machines). Each of these machines contain an 8-core Xeon processor and 16 GB of RAM and I deemed that sufficient to startup Virtual Machines without problems. At least, that was what I think.</p>
+
+<p>When we started to run Vagrant with VirtualBox, the performance of the software within the guest OS was appallingly slow. After some googling for more information about this apparent deficiency, I found many articles describing VirtualBox's slow filesystem read operations if you are accessing a shared folder. This is exactly what Vagrant needs to do in order for it to access your source code. This article explains in detail the various performance for Vagrant using VirtualBox vs VMWare (<a href="http://mitchellh.com/comparing-filesystem-performance-in-virtual-machines">http://mitchellh.com/comparing-filesystem-performance-in-virtual-machines</a>)</p>
+
+<p>So, in the end, I had to configure Vagrant to access the shared folders via NFS for Linux-based Host machines. As for the Windows Host boxes, we had no alternatives and so running Vagrant on VirtualBox produces the kind of performance that would make your Grandmother feel like Usain Bolt.</p>
+
+<p>I'm not sure if running Vagrant with VMWare would resolve some of the pain points of Vagrant but it seems you need to pay for a license to integrate Vagrant with VMWare. According to the article that compares the performance, it seemed that VMWare read operations are much faster than VirtualBox and so should provide a better performance.</p>
+
+<p>I guess if one is serious about using Vagrant, it would be best to purchase the VMWare provider license and pair it with a Linux Host OS for maximum efficacy.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-20596600-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

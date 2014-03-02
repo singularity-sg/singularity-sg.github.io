@@ -9,7 +9,9 @@ tags: ['vagrant','virtualization','development environment' ]
 
 Anyone that had been working on multiple projects on the same boxes will know that there is never a certainty if the development environment you have worked on for a particular project will still be able to run months down the road. It'll probably be filled with all sorts of gunk and remnants of other similar projects which would cause problems when you try to run your code again. This problem was especially pertinent if you run code that is very environment sensitive e.g. Ruby on Rails and its gems.
 
-Thus, the idea of an automatically provisioned development environment that can be spun up instantly in a clean state was something that had been talked about for a long time in my agile development team. Recently, we came across Vagrant (http://www.vagrantup.com/) and it seemed like the panacea to our coding environment problems. I had it setup for a Ruby On Rails project and it will automatically install RVM, Ruby gems and all the native packages for the Vagrant box. It will also automatically provision MySQL and even installs an Aptana Studio ide.
+Thus, the idea of an automatically provisioned development environment that can be spun up instantly in a clean state was something that had been talked about for a long time in my agile development team. Recently, we came across Vagrant (<http://www.vagrantup.com>) and it seemed like the panacea to our coding environment problems. I had it setup for a Ruby On Rails project and it will automatically install RVM, Ruby gems and all the native packages for the Vagrant box. It will also automatically provision MySQL and even installs an Aptana Studio ide.
+
+<!--more-->
 
 I installed Vagrant on 4 powerful development machines (a mix of Ubuntu Linux, CentOS Linux and Windows 7 host machines). Each of these machines contain an 8-core Xeon processor and 16 GB of RAM and I deemed that sufficient to startup Virtual Machines without problems. At least, that was what I think.
 

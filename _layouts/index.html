@@ -1,16 +1,18 @@
 ---
 layout: default
+excerpt: "this is my excerpt"
 ---
 {% include JB/setup %}
 
 {% for post in site.posts limit: 5 %}
-<div class="article" id="post.id">
+<div class="article" id="{{ post.id }}">
     <div class="header">
-        <span class="date">{{ post.date | date: "%-d %B %Y"  }}</span>
+        <div class="date"><span>{{ post.date | date: "%-d %B %Y"  }}</span></div>
         <h2>{{ post.title }}</h2>
     </div>
-    <div class="content">
-        {{ post.content }}
+    <div class="excerpt">
+        {{ post.excerpt }}
+        <span class="read-more"><a href="{{ post.url }}" class="post-link">...read more</a></span>
     </div>
 </div>
 {% endfor %}

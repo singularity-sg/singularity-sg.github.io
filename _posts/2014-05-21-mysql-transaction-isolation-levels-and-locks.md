@@ -2,7 +2,7 @@
 layout: post
 title: "MySQL Transaction Isolation Levels and Locks"
 description: ""
-category: ["database"] 
+category: "database" 
 tags: ["mysql"]
 ---
 {% include JB/setup %}

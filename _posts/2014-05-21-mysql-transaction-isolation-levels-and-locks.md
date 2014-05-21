@@ -11,7 +11,7 @@ Recently, an application that my team was working on encountered problems with a
 
 As it turned out, due to the fact that we have a dual node cluster, each of the user operation originated from a different web application (which in turn meant 2 different transaction running the same queries). The deadlock query happened to be a "INSERT INTO T... SELECT FROM S WHERE" query that introduced shared locks on the records that were used in the SELECT query. It didn't help that both T and S in this case happened to be the same table. In effect, both the shared locks and exclusive locks were applied on the same table. An attempt to explain the possible cause of the deadlock on the queries could be explained by the following table. This is based on the assumption that we are using a default REPEATABLE_READ transaction isolation level (I will explain the concept of transaction isolation later)
 
-<!-- more -->
+<!--more-->
 
 Assuming that we have a table as such
 

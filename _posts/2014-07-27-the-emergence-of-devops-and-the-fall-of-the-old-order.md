@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "The Emergence of DevOps and the Fall of the Old Order"
-description: ""
-category: 
-tags: []
+description: "Software Organisation in the New World"
+category: "Software Organisation" 
+tags: ["DevOps"]
 ---
 {% include JB/setup %}
 

@@ -12,7 +12,7 @@ Software Engineering has always been dependent on IT operations to take care of 
 
 However, the traditional way of organising departments in a software delivery organisation is starting to seem obsolete. The reason is that software infrastructure have moved towards the direction of being "agile". The same buzzword that had gripped the software development world has started to exert its effect on IT infrastructure. The evidence of this seismic shift is seen in the fastest growing (and disruptive) companies today. Companies like Netflix, Whatsapp and many tech companies have gone into what we would call "cloud" infrastructure that is dominated by Amazon Web Services.
 
-<!-- more -->
+<!--more-->
 
 There is huge progress in the virtualization technologies of hardware resources. This have in turn allowed companies like AWS and Rackspace to convert their server farms into discrete units of computing resources that can be diced and parcelled and redistributed as a service to their customers in an efficient manner. It is inevitable that all this configurable "hardware" resources will eventually be some form of "software" resource that can be maximally utilized by businesses. This has in turn bred a whole new genre of skillset that is required to manage, control and deploy these Infrastructure As A Service (IaaS). Some of the tools used by these services include provisioning tools like Chef or Puppet. Together with the software apis provided by the IaaS vendors, infrastructure can be brought up or down as required.
 

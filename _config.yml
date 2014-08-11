@@ -3,9 +3,12 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 exclude: [".ruby-gemset", ".ruby-version", ".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-pygments: true
+highlighter: pygments
 
 excerpt_separator: <!--more-->
+
+# Set the markdown engine
+markdown: kramdown        
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
@@ -23,8 +26,6 @@ author :
 # such as sitemap.txt 
 # Most places will/should use BASE_PATH to make the urls
 #
-# If you have set a CNAME (pages.github.com) set your custom domain here.
-# Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
 production_url : http://singularity-sg.github.io
@@ -129,4 +130,3 @@ JB :
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-  

@@ -26,9 +26,11 @@ You can also see this in action with the following embedded plunker code
 
 <iframe height="250px" width="100%" src="http://embed.plnkr.co/yAGCsQRH3M4LtysFy0fF/"></iframe>
 
-Using AngularJS, it is able to write a cogent User Interface that  
+Using AngularJS, it is possible to write relatively complex User Interface in an organised and elegant manner, always encapsulating the required logic within your components and never running the risk of errant global Javascript variables polluting your scope. As we can see later, it is also very testable, and there are built-in mechanisms to perform tests at the unit and functional level, ensuring that all your User Interface codebase goes through the same rigourous testing that your Java/Spring code undergoes, ensuring quality even at your user interfaces.  
 
 ## Differences in architecture between JSP and AngularJS
+
+When one migrate from a server-side templating engine like JSP or [Thymeleaf](http://http://www.thymeleaf.org/ "thymeleaf.org") to a Javascript based templating engine,one has to make a paradigm shift towards a client-server architecture between the UI application that resides in the client (in this case, it could be a browser) and the server-side web services that abstracts the complexities of the server-side logic. 
 
 
 

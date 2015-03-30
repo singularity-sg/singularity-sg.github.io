@@ -18,9 +18,9 @@ Some of you who had used Javascript frameworks like Knockdown.js may recognise t
 
 You can see an illustration of the difference here
 
-![One-way Data Binding][one-way-binding]
+![One-way Data Binding](/assets/images/one-way-binding.png)
 
-![Two-way Data Binding][two-way-binding]
+![Two-way Data Binding](/assets/images/two-way-binding.png)
 
 You can also see this in action with the following embedded plunker code
 
@@ -30,8 +30,9 @@ Using AngularJS, it is possible to write relatively complex User Interface in an
 
 ## Differences in architecture between JSP and AngularJS
 
-When one migrate from a server-side templating engine like JSP or [Thymeleaf](http://http://www.thymeleaf.org/ "thymeleaf.org") to a Javascript based templating engine,one has to make a paradigm shift towards a client-server architecture between the UI application that resides in the client (in this case, it could be a browser) and the server-side web services that abstracts the complexities of the server-side logic. 
+When one migrates from a server-side templating engine like JSP or [Thymeleaf](http://http://www.thymeleaf.org/ "thymeleaf.org") to a Javascript-based templating engine, one has to experience a paradigm shift towards a client-server architecture. One has to cease thinking of the view as being a part of the web application and instead conceive the web application as 2 separate client-side and server-side applications. An illustration of this is in the next diagram which shows how a Spring application becomes a provider of RESTful Web Services, servicing various front end applications including an AngularJS browser-based application. These services could include OAuth, Authentication and other business logic services which should be obfuscated from public view. One should bear in mind that any data or business logic that is published in the form of JSON or javascript files are exposed for the client-side to see. Thus, if there's any business sensitive logic or workflow that should not be exposed, these logic should only be performed on the backend.
 
+![AngularJS - Spring application](/assets/images/angularjs-spring.png)
 
 
 ## Considerations when moving from JSP to AngularJS

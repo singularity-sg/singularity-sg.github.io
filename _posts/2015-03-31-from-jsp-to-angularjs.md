@@ -55,11 +55,46 @@ Another advantage of using AngularJS to write your html templates is that the te
 
 You can probably spot some non-HTML addition to the template includes attributes like "data-ng-click" which maps a click on a button to a method name call. There's also "data-ng-repeat" which will look through a JSON object and generate the necessary html to render the same view for each item in the list. Yet with all these logic in place, we are still able to validate and view the html template from the browser. AngularJS calls all the non-html tags and attributes "directives" and the purpose of these directives is to enhance the capabilities of HTML.
 
+### Scope in AngularJS
+
+One important concept to grasp in AngularJS is that of scopes. In the past, whenever I write a script for my web application, I had to manage the variable names and construct special name-spaced objects in order to store my scoped properties. However, AngularJS does it for you automatically based on its MVx concept. Every directive will inherit a scope from its controller (or if you would like, an isolate scope that does not inherit scope properties) where the properties and variables created in this scope does not pollute the rest of the scopes or global context.
+
+Scopes are used as the "glue" of an AngularJS application. Controllers in AngularJS use scopes to interact with the views. Scopes are also used to pass models and properties between directives and controllers. The advantage of this is that we are now forced to design our application in a way which components are self-contained and relationships between components have to be considered carefully through a use of a model that can be prototypically inherited from a parent.
+
+A scope can be nested in another scope prototypically in the same way Javascript implements its inheritance model via prototyping. However, one must be careful that any property name that is declared in the child scope that is similar to the parent will be hide the parent property from the child scope thereafter.
+
+At the very top in the hierarchy of scopes is the $rootScope, a scope that is accessible globally and can be used as the last resort to share properties and models across the whole application. The use of this should be minimized as it introduces a sort of "global" variable that can pose the same problems when it is over-used.
+
+More information about scopes can be gleaned from the AngularJS documentation found [here](https://docs.angularjs.org/guide/scope)
+
+### Directives in AngularJS
+
+Directives is one of the most important concept in AngularJS and it is indeed the foundation of what we constitute AngularJS in the markup. It is essentially all the additional customized markup in the form of element, attributes, classes or comments in our HTML markup that gives the markup new functionalities.
+
+Consider the following code snippet that demonstrates a customized directive called *wdsCustom* that will replace this tag with markup that contains information about a model called "wds" that is declared in the controller scope that wraps the directive. You can have a look at the files *app.js*, *index.html* and directive template *wds-custom-directive.html*
+
+<iframe height="250px" width="100%" src="http://embed.plnkr.co/cP179vrMvavJieCXVe1X/"></iframe>
+
+Ths article does not attempt to teach you how to write a directive as you can refer to the official documentation [here](https://docs.angularjs.org/guide/directive).
+
 ## Differences in architecture between JSP and AngularJS
 
 When one migrates from a server-side templating engine like JSP or [Thymeleaf](http://http://www.thymeleaf.org/ "thymeleaf.org") to a Javascript-based templating engine, one has to experience a paradigm shift towards a client-server architecture. One has to cease thinking of the view as being a part of the web application and instead conceive the web application as 2 separate client-side and server-side applications. An illustration of this is in the next diagram which shows how a Spring application becomes a provider of RESTful Web Services, servicing various front end applications including an AngularJS browser-based application as well as a possibility to provide services for mobile clients like tablets or smartphones. These services could include OAuth, Authentication and other business logic services which should be obfuscated from public view. One should bear in mind that any data or business logic that is published in the form of JSON or javascript files are exposed for the client-side to see. Thus, if there's any business sensitive logic or workflow that should not be exposed, these logic should only be performed on the backend.
 
 ![AngularJS - Spring application](/assets/images/angularjs-spring.png)
+
+### Application structure
+
+One question when we migrate over to AngularJS are the questions on how we would want to organise our AngularJS + Spring application. At my company WDS, we are using Maven as our dependency and package management tool for Java/Spring and that influenced how we decided to place our AngularJS javascript application. The AngularJS application is created within src/main/webapp and the main files are
+
+components/ # the various components are stored here
+js/app.js   # where we bootstrap the application
+services/   # common services are stored here
+plugins/    # additional external plugins e.g. jquery
+images/    
+videos/
+
+You can see an image capture of the folder structure in Eclipse ![here](/assets/images/angularjs_spring_structure.png)
 
 ## Considerations when moving from JSP to AngularJS
 
@@ -181,7 +216,23 @@ You can read the UI-Router wiki to understand more about how this works.
 
 If your web application requires authentication and authorization to resources or you implement some kind of user role management, you will need a way for your AngularJS application to authenticate users who login to your page. You might already be using Spring Security for your application and you can still reuse the same code with slight modifications on how you handle session state after authentication. This article does not go into details but you can refer to [this](https://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii) for more information on how you can integrate Spring security and AngularJS to perform this function.
 
+## Testing your AngularJS code
+
+For a web application developer, one of the biggest bugbear is frontend testing of the UI. Traditionally, that meant having a way to unit test your Javascript code running on the browser as well as a functional way of emulating a real user clicking through your various features. AngularJS helps to ease both these problems by providing tools as well as a well-defined paradigm in its framework to encourage testing.
+
+It has built-in mocking framework for mocking external HTTP calls and together with Jasmine, a BDD framework, allows you to easily write tests for your AngularJS directives.
+
+You can also use a tool called Karma that will automatically run unit tests everytime you make changes to your code and in that way encourages TDD by giving you the red->refactor->green responsive cycle.
+
+It is also possible to integrate a test-runner with your build tool like Maven using a maven plugin called [jasmine-maven-plugin](http://searls.github.io/jasmine-maven-plugin/spec-runner-templates.html) so that your javascript tests run each time you do a build.
+
+Finally, for functional testing, you have a AngularJS recommended tool called [Protractor](http://angular.github.io/protractor/#/tutorial) that uses Selenium Webdriver to run your functional tests in a BDD syntax. Practically, we had some issues with functional testing using Protractor as there are many subtleties that will affect your functional test in AngularJS as Protractor has some syncing features that will wait for your AngularJS code to load before it proceeds with the tests but if certain steps venture out of your AngularJS app (for e.g. you perform OAuth authentication externally), it may fail.
+
+## Sample Pet Clinic for reference
+
+An example of a Spring Pet clinic application that we have tried to revamp as an AngularJS app with an updated design can be found [here](https://github.com/singularity-sg/spring-petclinic)
+
 ## Conclusion
 
-Migrating to AngularJS from JSP may seem daunting but it can be very rewarding in the long run as it makes for a more maintainable and testable user interface. 
+Migrating to AngularJS from JSP may seem daunting but it can be very rewarding in the long run as it makes for a more maintainable and testable user interface. The trend towards client side rendered views also encourages building more responsive web applications that were previously hampered by the design in server side rendering. I hope this article will be a useful resource for a developer more familiar with JSP/Server-side templates to try AngularJS.
 

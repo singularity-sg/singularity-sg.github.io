@@ -10,11 +10,15 @@ tags: ["angularjs","spring mvc","jsp"]
 ## Target Audience
 This article is written for Spring developers who are familiar with JSP development and who would like to understand how to migrate to a frontend-based web application like AngularJS.
 
+## Sample Pet Clinic for reference
+
+An example of a Spring Pet clinic application that we have tried to revamp as an AngularJS app with an updated design can be found [here](https://github.com/singularity-sg/spring-petclinic)
+
 ## Introduction on AngularJS
 
 AngularJS is a Javascript framework created at Google that touts itself as a "Superheroic Web MVW Framework" (where the "W" in the "MVW" being a tongue-in-cheek reference to "Whatever" for all the various [MVx architecture](http://blogs.k10world.com/technology/difference-between-mvc-vs-mvp-vs-mvvm/)).As it is based on an MVx architecture, AngularJS provides a structure to Javascript development and thus gives Javascript an elevated status compared to traditional Spring + JSP application that probably uses Javascript to provide that bit of interactivity on the user interface. With AngularJS, your Javascript application will also inherit features like Dependency-Injection, HTML-vocabulary extension (via the use of custom directives), unit-testing and functional testing integration as well as DOM-selectors ala JQuery (using jqLite as it provides only a subset of JQuery but you could also easily use JQuery if you prefer). AngularJS also introduces scopes to your Javascript code so that variables declared in your code are bound only to the scope that is required.This prevents variables pollution that inadvertently arises when the size of your Javascript grows. 
 
-Some of you who had used Javascript frameworks like Knockdown.js may recognise the value of automatic binding of a Javascript object/properties to a HTML view but AngularJS goes one step further and provide a mechanism for 2-way data-binding. That means that not only do you have the benefits of having your view updated with changes inside your Javascript model, any changes you make to your UI will also update the Javascript model (and consequently any other views that is bound to that model). It is almost magical to see all the views that are bound to the same JS model on the app update itself automatically. Moreover, since your model can be set to a particular scope, only views that belong to the same scope will be affected, allowing you to sandbox code that should be local only to a particular portion of your view. (This is done via an AngularJS attribute called ng-controller that is set in your HTML templates)
+Some of you who had used Javascript frameworks like [Knockout.js](http://knockoutjs.com/) may recognise the value of automatic binding of a Javascript object/properties to a HTML view but AngularJS goes one step further and provide a mechanism for 2-way data-binding. That means that not only do you have the benefits of having your view updated with changes inside your Javascript model, any changes you make to your UI will also update the Javascript model (and consequently any other views that is bound to that model). It is almost magical to see all the views that are bound to the same JS model on the app update itself automatically. Moreover, since your model can be set to a particular scope, only views that belong to the same scope will be affected, allowing you to sandbox code that should be local only to a particular portion of your view. (This is done via an AngularJS attribute called ng-controller that is set in your HTML templates)
 
 You can see an illustration of the difference here
 
@@ -57,7 +61,7 @@ You can probably spot some non-HTML addition to the template includes attributes
 
 ### Scope in AngularJS
 
-One important concept to grasp in AngularJS is that of scopes. In the past, whenever I write a script for my web application, I had to manage the variable names and construct special name-spaced objects in order to store my scoped properties. However, AngularJS does it for you automatically based on its MVx concept. Every directive will inherit a scope from its controller (or if you would like, an isolate scope that does not inherit scope properties) where the properties and variables created in this scope does not pollute the rest of the scopes or global context.
+One important concept to grasp in AngularJS is that of scopes. In the past, whenever I had to write javascript for my web application, I had to manage the variable names and construct special name-spaced objects in order to store my scoped properties. However, AngularJS does it for you automatically based on its MVx concept. Every directive will inherit a scope from its controller (or if you would like, an isolate scope that does not inherit scope properties) where the properties and variables created in this scope does not pollute the rest of the scopes or global context.
 
 Scopes are used as the "glue" of an AngularJS application. Controllers in AngularJS use scopes to interact with the views. Scopes are also used to pass models and properties between directives and controllers. The advantage of this is that we are now forced to design our application in a way which components are self-contained and relationships between components have to be considered carefully through a use of a model that can be prototypically inherited from a parent.
 
@@ -71,11 +75,11 @@ More information about scopes can be gleaned from the AngularJS documentation fo
 
 Directives is one of the most important concept in AngularJS and it is indeed the foundation of what we constitute AngularJS in the markup. It is essentially all the additional customized markup in the form of element, attributes, classes or comments in our HTML markup that gives the markup new functionalities.
 
-Consider the following code snippet that demonstrates a customized directive called *wdsCustom* that will replace this tag with markup that contains information about a model called "wds" that is declared in the controller scope that wraps the directive. You can have a look at the files *app.js*, *index.html* and directive template *wds-custom-directive.html*
+Consider the following code snippet that demonstrates a customized directive called *wdsCustom* that will replace the markup element *<wds-custom company="wds">* with markup that contains information about a model called "wds" that is declared in the controller scope that wraps the directive. You can have a look at the files *app.js*, *index.html* and directive template *wds-custom-directive.html* to see how this works in the below plunkr snippet.
 
 <iframe height="250px" width="100%" src="http://embed.plnkr.co/cP179vrMvavJieCXVe1X/"></iframe>
 
-Ths article does not attempt to teach you how to write a directive as you can refer to the official documentation [here](https://docs.angularjs.org/guide/directive).
+As this article does not attempt to teach you how to write a directive, you can refer to the official documentation [here](https://docs.angularjs.org/guide/directive).
 
 ## Differences in architecture between JSP and AngularJS
 
@@ -94,14 +98,14 @@ plugins/    # additional external plugins e.g. jquery
 images/    
 videos/
 
-You can see an image capture of the folder structure in Eclipse ![here](/assets/images/angularjs_spring_structure.png)
+You can see an image capture of the folder structure in Eclipse ![here](/assets/images/angularjs_spring_structure.png). This way of grouping the resources uses the feature-grouping method. There are also ways to group your resources based on types, e.g. grouping all your controllers, services and views into its namesake folder. There are pros and cons for either option but we prefer to use the feature grouping way to contain our resources.
 
 ## Considerations when moving from JSP to AngularJS
 
 If you are considering migrating from JSP to AngularJS, there are a few factors to consider for a successful migration. 
 
 ### Converting your Spring controllers to RESTful services
-You will need to transform your controllers so instead of forwarding the response to a tempting engine, you will provide services that will be serialised into JSON data instead. The following is an example of how a standard Spring MVC controller RequestMapping uses the ModelAndView object to render a view with the Owner as described in the url mapping.
+You will need to transform your controllers so instead of forwarding the response to a templating engine to render a view to the client, you will provide services that will be serialised into JSON data instead. The following is an example of how a standard Spring MVC controller RequestMapping uses the ModelAndView object to render a view with the Owner as described in the url mapping.
 
 {% highlight java %}
 @RequestMapping("/owners/{ownerId}")
@@ -214,7 +218,9 @@ You can read the UI-Router wiki to understand more about how this works.
 
 ### Authentication
 
-If your web application requires authentication and authorization to resources or you implement some kind of user role management, you will need a way for your AngularJS application to authenticate users who login to your page. You might already be using Spring Security for your application and you can still reuse the same code with slight modifications on how you handle session state after authentication. This article does not go into details but you can refer to [this](https://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii) for more information on how you can integrate Spring security and AngularJS to perform this function.
+If your web application requires authentication and authorization to resources or you implement some kind of user role management, you will need a way for your AngularJS application to authenticate users who login to your page. You might already be using Spring Security for your application and you can still reuse the same code with slight modifications on how you handle session state after authentication. You can either opt to use a stateful way to maintain your credentials throughout the session or a stateless way by submitting your credentials in a cookie at every request. We prefer to go with the stateless way as it means that you are able to horizontally scale your servers and your authenticated credentials can be maintained across different servers.
+
+This article does not go into details into either implementation but you can refer to [this](https://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii) for more information on how you can integrate Spring security and AngularJS to perform this function.
 
 ## Testing your AngularJS code
 
@@ -228,11 +234,6 @@ It is also possible to integrate a test-runner with your build tool like Maven u
 
 Finally, for functional testing, you have a AngularJS recommended tool called [Protractor](http://angular.github.io/protractor/#/tutorial) that uses Selenium Webdriver to run your functional tests in a BDD syntax. Practically, we had some issues with functional testing using Protractor as there are many subtleties that will affect your functional test in AngularJS as Protractor has some syncing features that will wait for your AngularJS code to load before it proceeds with the tests but if certain steps venture out of your AngularJS app (for e.g. you perform OAuth authentication externally), it may fail.
 
-## Sample Pet Clinic for reference
-
-An example of a Spring Pet clinic application that we have tried to revamp as an AngularJS app with an updated design can be found [here](https://github.com/singularity-sg/spring-petclinic)
-
 ## Conclusion
 
 Migrating to AngularJS from JSP may seem daunting but it can be very rewarding in the long run as it makes for a more maintainable and testable user interface. The trend towards client side rendered views also encourages building more responsive web applications that were previously hampered by the design in server side rendering. I hope this article will be a useful resource for a developer more familiar with JSP/Server-side templates to try AngularJS.
-

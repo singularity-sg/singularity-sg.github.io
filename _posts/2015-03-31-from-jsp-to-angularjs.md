@@ -59,6 +59,8 @@ Another advantage of using AngularJS to write your html templates is that the te
 
 You can probably spot some non-HTML addition to the template includes attributes like "data-ng-click" which maps a click on a button to a method name call. There's also "data-ng-repeat" which will look through a JSON object and generate the necessary html to render the same view for each item in the list. Yet with all these logic in place, we are still able to validate and view the html template from the browser. AngularJS calls all the non-html tags and attributes "directives" and the purpose of these directives is to enhance the capabilities of HTML.
 
+<!--more-->
+
 ### Scope in AngularJS
 
 One important concept to grasp in AngularJS is that of scopes. In the past, whenever I had to write javascript for my web application, I had to manage the variable names and construct special name-spaced objects in order to store my scoped properties. However, AngularJS does it for you automatically based on its MVx concept. Every directive will inherit a scope from its controller (or if you would like, an isolate scope that does not inherit scope properties) where the properties and variables created in this scope does not pollute the rest of the scopes or global context.

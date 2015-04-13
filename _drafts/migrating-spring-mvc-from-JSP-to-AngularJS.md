@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "From JSP to AngularJS"
-description: "Moving from Server-Side templates to AngularJS"
+title: "Migrating Spring MVC From JSP to AngularJS"
+description: "Moving from Server-Side templates to AngularJS for a Spring MVC application"
 category: "Software Development" 
 tags: ["angularjs","spring mvc","jsp"]
 ---
@@ -18,7 +18,7 @@ An example of a Spring Pet clinic application that we have tried to revamp as an
 
 AngularJS is a Javascript framework created at Google that touts itself as a "Superheroic Web MVW Framework" (where the "W" in the "MVW" being a tongue-in-cheek reference to "Whatever" for all the various [MVx architecture](http://blogs.k10world.com/technology/difference-between-mvc-vs-mvp-vs-mvvm/)).As it is based on an MVx architecture, AngularJS provides a structure to Javascript development and thus gives Javascript an elevated status compared to traditional Spring + JSP application that probably uses Javascript to provide that bit of interactivity on the user interface. With AngularJS, your Javascript application will also inherit features like Dependency-Injection, HTML-vocabulary extension (via the use of custom directives), unit-testing and functional testing integration as well as DOM-selectors ala JQuery (using jqLite as it provides only a subset of JQuery but you could also easily use JQuery if you prefer). AngularJS also introduces scopes to your Javascript code so that variables declared in your code are bound only to the scope that is required.This prevents variables pollution that inadvertently arises when the size of your Javascript grows. 
 
-Some of you who had used Javascript frameworks like [Knockout.js](http://knockoutjs.com/) may recognise the value of automatic binding of a Javascript object/properties to a HTML view but AngularJS goes one step further and provide a mechanism for 2-way data-binding. That means that not only do you have the benefits of having your view updated with changes inside your Javascript model, any changes you make to your UI will also update the Javascript model (and consequently any other views that is bound to that model). It is almost magical to see all the views that are bound to the same JS model on the app update itself automatically. Moreover, since your model can be set to a particular scope, only views that belong to the same scope will be affected, allowing you to sandbox code that should be local only to a particular portion of your view. (This is done via an AngularJS attribute called ng-controller that is set in your HTML templates)
+When you are developing a Spring MVC application using JSP, you usually use forms to submit data to the backend for processing. Your model for the application is then mapped to the form field values that you have submitted via the HTML form tag. The mapping of the form fields to your model in the backend is thus something that needs to be done manually. Some of you may recognise the value of having automatic binding from your Java POJO to a HTML view but AngularJS goes one step further and provide a mechanism for 2-way data-binding. That means that not only do you have the benefits of having your view updated with changes inside your Javascript model, any changes you make to your UI will also update the Javascript model (and consequently any other views that is bound to that model). It is almost magical to see all the views that are bound to the same JS model on the app update itself automatically. Moreover, since your model can be set to a particular scope, only views that belong to the same scope will be affected, allowing you to sandbox code that should be local only to a particular portion of your view. (This is done via an AngularJS attribute called ng-controller that is set in your HTML templates)
 
 You can see an illustration of the difference here
 
@@ -48,8 +48,8 @@ Another advantage of using AngularJS to write your html templates is that the te
         <a class="btn btn-default" data-toggle="modal" data-target="#petModal" data-ng-click="editPet(pet.id)">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Pet
         </a>
-        <a class="btn btn-default" data-toggle="modal" data-target="#addPetVisitModal">
-          <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Visit
+        <a class="btn btn-default">
+          <span></span> Add Visit
         </a>
       </div>
     </div>
